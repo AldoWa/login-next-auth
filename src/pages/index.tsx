@@ -1,13 +1,14 @@
+import Image from "next/image";
+
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
+import { Container } from "@/components/Container";
+import { Wrapper } from "@/components/Wrapper";
 
 export default function Home() {
   return (
-    <div className="container mx-auto">
-      <div className="border rounded-lg border-[#282828] shadow-xl p-9	">
-        <p className="text-2xl text-[#000] font-light mb-7">Welcome !</p>
-        <h1 className="text-3xl font-medium text-[#000] mb-1">Sign in to</h1>
-        <h2 className="text-base font-normal text-[#000] mb-12">Lorem Ipsum is simply</h2>
+    <Container>
+      <Wrapper>
         <form id="form-login" name="form-login">
           <Input
             label="Email"
@@ -29,7 +30,7 @@ export default function Home() {
           </div>
           <Button text="Login" type="submit" className="mt-9"></Button>
         </form>
-      </div>
-    </div>
+      </Wrapper>
+    </Container>
   );
 }

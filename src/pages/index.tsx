@@ -20,8 +20,15 @@ export default function Home() {
             type="password"
             className="mt-9"
           />
+          <div className="flex justify-between items-center mt-6">
+            <div className="flex gap-3">
+              <input type="checkbox" id="input-checkbox"/>
+              <label htmlFor="input-checkbox">Remember me</label>
+            </div>
+            <span className="font-light text-xs text-[#4D4D4D]">Forgot Password ?</span>
+          </div>
+          <Button text="Login" type="submit" className="mt-9"></Button>
         </form>
-        <Button text="Login" className="mt-9"></Button>
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ export const Input = ({ label, placeholder, errors, className, ...rest }: InputP
       </label>
       <input
         name="label-input"
-        id="input"
+        id={`input-${label}`}
         type={rest.type}
         autoComplete={rest.type}
         className={

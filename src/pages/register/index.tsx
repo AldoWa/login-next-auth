@@ -8,6 +8,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 const formSchema = z.object({
   confirmPassword: z.string(
@@ -44,7 +45,7 @@ export default function Register() {
     const schema = formSchema.parse(data)
     
     try{
-      await fetch('/api/register', {
+      const response = await fetch('/api/register', {
         method: 'POST',
         body: JSON.stringify({
           email: schema.email,
@@ -52,11 +53,22 @@ export default function Register() {
           password: schema.password,
         }),
       })
-    } catch (err) {
-      return err
+      
+      if(!response.ok) throw new Error('An error occurred while registering')
+      
+      router.push('/')
+      toast.success('Account has been created', {
+        position: "top-right",
+        autoClose: 2000,
+        theme: "light",
+      })
+    } catch (err: any) {
+      toast.error(err.message, {
+        position: "top-right",
+        autoClose: 2000,
+        theme: "light",
+      })
     }
-
-    router.push('/')
   }
 
   return (

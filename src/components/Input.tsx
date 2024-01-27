@@ -6,9 +6,9 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   errors?: Array<string>;
 }
 
-export const Input = ({ label, placeholder, errors, ...rest }: InputProps) => {
+export const Input = ({ label, placeholder, errors, className, ...rest }: InputProps) => {
   return (
-    <div>
+    <div className={className}>
       <label
         htmlFor="input"
         aria-describedby="label-validation"
@@ -21,10 +21,13 @@ export const Input = ({ label, placeholder, errors, ...rest }: InputProps) => {
         id="input"
         type={rest.type}
         autoComplete={rest.type}
-        className="py-5 px-6 h-14 rounded-md border border-[#282828] focus:outline-none focus:ring-2 focus:ring-[#3182CE] focus:border-transparent
-          w-full mt-2 text-sm placeholder:text-[#ABABAB] text-[#000] font-light
-        "
+        className={
+          `py-5 px-6 h-14 rounded-md border border-[#282828] focus:outline-none focus:ring-2 focus:ring-[#3182CE] focus:border-transparent
+           w-full mt-2 text-sm placeholder:text-[#ABABAB] text-[#000] font-light
+          `
+        }
         placeholder={placeholder}
+        {...rest}
       />
       {!!errors?.length && (
         <div className="flex flex-col mt-2 gap-1">

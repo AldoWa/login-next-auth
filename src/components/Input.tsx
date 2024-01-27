@@ -3,10 +3,11 @@ import { InputHTMLAttributes } from "react";
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   placeholder: string;
-  errors?: Array<string>;
+  error?: string;
+  register?: any;
 }
 
-export const Input = ({ label, placeholder, errors, className, ...rest }: InputProps) => {
+export const Input = ({ label, placeholder, error, className, register, ...rest }: InputProps) => {
   return (
     <div className={className}>
       <label
@@ -17,7 +18,7 @@ export const Input = ({ label, placeholder, errors, className, ...rest }: InputP
         {label}
       </label>
       <input
-        name="label-input"
+        {...register}
         id={`input-${label}`}
         type={rest.type}
         autoComplete={rest.type}
@@ -29,15 +30,9 @@ export const Input = ({ label, placeholder, errors, className, ...rest }: InputP
         placeholder={placeholder}
         {...rest}
       />
-      {!!errors?.length && (
-        <div className="flex flex-col mt-2 gap-1">
-          {errors.map((error) => (
-            <span aria-required="true" id="label-validation" className="text-red-500" key={error}>
-              {error}
-            </span>
-          ))}
-        </div>
-      )}
+      {<span aria-required="true" id="label-validation" className="text-red-500 mt-2 block" key={error}>
+        {error}
+      </span>}
     </div>
   );
 };

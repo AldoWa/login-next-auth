@@ -8,7 +8,7 @@ type Data = {
 }
 
 const User = z.object({
-  name: z.string(
+  username: z.string(
     {
       required_error: 'Name is required',
       invalid_type_error: "Name must be a string",
@@ -36,10 +36,14 @@ export default async function handler(
   res: NextApiResponse<Data>,
 ) {
   try{
-    const { name, email, password } = req.body;
-
-    const user = User.safeParse(req.body);
-    
+    const { username, email, password } = JSON.parse(req.body);
+  
+    const user = User.safeParse({
+      username,
+      email,
+      password
+    });
+    console.log(user.success ? user.success : user.error)
     if(user.success) {
       const hasEmailRegistered = await db.user.findUnique({ where: { email: email }})
 
@@ -49,7 +53,7 @@ export default async function handler(
   
       await db.user.create({
         data: {
-          name: name,
+          name: username,
           email: email,
           password: password
         }

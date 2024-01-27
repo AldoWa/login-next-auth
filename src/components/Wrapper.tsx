@@ -2,7 +2,6 @@ import Image from "next/image";
 import TeamDiscussion from '../../public/team-discussion.png'
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/router";
 
 interface WrapperProps {
   children: React.ReactNode;
@@ -13,8 +12,8 @@ export const Wrapper = ({ children }: WrapperProps) => {
   const isRegister = pathName === '/register'
 
   return (
-    <section className="flex items-center justify-center md:h-screen md:px-0 px-3 md:py-0 py-3 ">
-      <div className="border rounded-lg border-[#282828] shadow-xl md:p-9 p-5">
+    <section className="flex items-center justify-center xl:h-screen xl:px-0 px-3 xl:py-0 py-3 ">
+      <div className="border rounded-lg border-[#282828] shadow-xl md:p-9 p-5 max-w-lg">
         <p className="text-2xl text-[#000] font-light mb-7">Welcome !</p>
         <h1 className="text-3xl font-medium text-[#000] mb-1">Sign {isRegister ? "out" : "in"} to</h1>
         <h2 className="text-base font-normal text-[#000] mb-12">Lorem Ipsum is simply</h2>

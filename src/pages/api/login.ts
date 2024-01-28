@@ -22,6 +22,7 @@ export default async function handler(
   if(req.method !== 'POST'){
     return res.status(405).json({ error: 'Method not allowed' });
   }
+  
   const { email, password } = req.body;
   
   try {
@@ -38,16 +39,13 @@ export default async function handler(
       throw new Error('Password incorrect');
     }
 
-    /**
-     * Only for study next auth, but never use a expose secret token !!
-     */
     const token = jwt.sign({
       exp: 60 * 60 * 24,
       data: {
         id: user.id,
         email: user.email,
       }
-    }, 'secret');
+    }, process.env.SECRET_TOKEN!);
 
     return res.status(200).json({ data: { 
       token: token,

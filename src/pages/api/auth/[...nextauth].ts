@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
-interface User {
+export interface User {
   username: string;
   email: string;
   id: string;

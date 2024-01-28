@@ -35,6 +35,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>,
 ) {
+  if(req.method !== 'POST'){
+    return res.status(405).json({ message: 'Method not allowed' });
+  }
   try{
     const { username, email, password } = JSON.parse(req.body);
   
@@ -43,7 +46,6 @@ export default async function handler(
       email,
       password
     });
-    console.log(user.success ? user.success : user.error)
     if(user.success) {
       const hasEmailRegistered = await db.user.findUnique({ where: { email: email }})
 
